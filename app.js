@@ -182,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initHeroSlider();
+    initServicesBgSlider();
     if (typeof gsap !== 'undefined' && typeof lottie !== 'undefined') {
         initAdvancedAnimations();
     }
@@ -296,7 +297,19 @@ function renderDynamicPhotos() {
         heroSlider.appendChild(overlay);
     }
 
-    // 2. Service Slideshows
+    // 2. Services section background slider (home photos)
+    const servicesBgSlider = document.getElementById('servicesBgSlider');
+    if (servicesBgSlider && data.home) {
+        const overlay = servicesBgSlider.querySelector('.services-bg-overlay');
+        data.home.forEach((src, index) => {
+            const slide = document.createElement('div');
+            slide.className = `slide ${index === 0 ? 'active' : ''}`;
+            slide.style.backgroundImage = `url('${src}')`;
+            servicesBgSlider.insertBefore(slide, overlay);
+        });
+    }
+
+    // 3. Service Slideshows
     const configs = [
         { id: 'slideshowDesign', images: data.design, alt: 'Design' },
         { id: 'slideshowConstruction', images: data.construction, alt: 'Construction' },
@@ -368,6 +381,21 @@ function initHeroSlider() {
 }
 
 // =============================================
+// Services Section Background Slider
+// =============================================
+function initServicesBgSlider() {
+    const slides = document.querySelectorAll('#servicesBgSlider .slide');
+    if (slides.length === 0) return;
+
+    let current = 0;
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 6000);
+}
+
+// =============================================
 // Advanced Animations (GSAP, Canvas, Lottie)
 // =============================================
 function initAdvancedAnimations() {
@@ -400,9 +428,9 @@ function initAdvancedAnimations() {
         }
     );
 
-    // 2. Parallax for Services Background
-    gsap.to('.services-section', {
-        backgroundPositionY: '100%',
+    // 2. Parallax for Services Background slider
+    gsap.to('#servicesBgSlider', {
+        y: '16%',
         ease: 'none',
         scrollTrigger: {
             trigger: '.services-section',
