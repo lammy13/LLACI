@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initialize theme and advanced animations on load
-    setTheme(localStorage.getItem('aura-theme') || 'light');
+    setTheme('light');
     initQuotes();
     
     // Inject dynamic photos before initializing sliders
