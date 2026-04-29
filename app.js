@@ -414,10 +414,11 @@ function renderDynamicPhotos() {
 function initHeroSlider() {
     const slides = document.querySelectorAll('.hero-bg-slider .slide');
     if (slides.length === 0) return;
+    if (slides.length === 1) return; // single cinematic photo — no cycling needed
 
     let currentSlide = 0;
     let intervalId = null;
-    const delay = isMobile ? 8000 : 5000; // slower cycle on mobile saves battery
+    const delay = isMobile ? 8000 : 5000;
 
     const advance = () => {
         slides[currentSlide].classList.remove('active');

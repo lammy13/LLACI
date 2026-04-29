@@ -447,12 +447,67 @@ main {
     height: 100%;
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.4) 0%,
-        rgba(0, 0, 0, 0) 30%,
-        rgba(0, 0, 0, 0) 70%,
-        rgba(2, 1, 26, 0.5) 100%
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.1) 30%,
+        rgba(0, 0, 0, 0.1) 60%,
+        rgba(0, 0, 0, 0.72) 100%
     );
     z-index: 2;
+}
+
+/* Ken Burns slow zoom on single cinematic photo */
+@keyframes kenBurns {
+    from { transform: scale(1);    background-position: center 40%; }
+    to   { transform: scale(1.07); background-position: center 44%; }
+}
+
+.hero-bg-slider .slide.kenburns {
+    animation: kenBurns 14s ease-out forwards;
+    will-change: transform;
+}
+
+/* Thin decorative line between logo and title */
+.hero-divider {
+    width: clamp(50px, 8vw, 100px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+    margin: 0 auto 1.2rem;
+}
+
+/* Scroll indicator — bouncing dot in a pill */
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 2.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+.hero-scroll-indicator span {
+    display: block;
+    width: 22px;
+    height: 36px;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    border-radius: 11px;
+    position: relative;
+}
+
+.hero-scroll-indicator span::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 7px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 2px;
+    animation: scrollDot 2s ease-in-out infinite;
+}
+
+@keyframes scrollDot {
+    0%, 100% { opacity: 1;   transform: translateX(-50%) translateY(0); }
+    50%       { opacity: 0.2; transform: translateX(-50%) translateY(9px); }
 }
 
 .hero-content {
@@ -481,12 +536,13 @@ main {
 
 /* Two-phase logo reveal */
 .hero-logo-wrap {
-    height: clamp(160px, 22vw, 320px);
+    width: clamp(280px, 46vw, 560px);
+    height: auto;
     aspect-ratio: 1024 / 648;
-    max-width: 90vw;
+    max-width: 88vw;
     position: relative;
     display: inline-block;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.8rem;
 }
 
 .hero-logo-letters,
@@ -4485,7 +4541,7 @@ body[data-theme="light"] #menuToggle {
 
     /* Hero */
     .hero-content { padding: 5rem 1.2rem 2rem; }
-    .hero-logo-wrap { height: clamp(100px, 38vw, 200px); }
+    .hero-logo-wrap { width: clamp(200px, 82vw, 340px); height: auto; }
     .hero-title {
         font-size: clamp(1rem, 5.5vw, 1.8rem);
         letter-spacing: clamp(0.06em, 1.5vw, 0.25em);
