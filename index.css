@@ -487,7 +487,6 @@ main {
     position: relative;
     display: inline-block;
     margin-bottom: 2.5rem;
-    animation: kenteLogoShine 15s linear infinite 2s;
 }
 
 .hero-logo-letters,
