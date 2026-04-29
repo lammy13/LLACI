@@ -35,6 +35,8 @@
 </head>
 
 <body data-theme="light">
+    <!-- Scroll Progress Bar -->
+    <div id="scrollProgress" class="scroll-progress"></div>
     <!-- Particle System Canvas -->
     <canvas id="particleCanvas" class="bg-canvas"></canvas>
     <!-- Navigation -->
@@ -43,21 +45,15 @@
         <button class="hero-cta nav-cta" data-href="#contact">
             <span class="hero-cta-text"><span class="text-yellow">Get</span> <span class="text-red">Quote</span></span>
         </button>
-        <div class="nav-music-group">
-            <button class="nav-music-toggle music-toggle" id="musicToggleBtn" onclick="handleMusicBtn()" title="Play/Pause Music">
-                <svg id="musicPlayIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
-                <svg id="musicPauseIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-                    <rect x="6" y="4" width="4" height="16"></rect>
-                    <rect x="14" y="4" width="4" height="16"></rect>
-                </svg>
-                <svg id="musicReplayIcon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-                    <polyline points="3 3 3 8 8 8"></polyline>
-                </svg>
-            </button>
-        </div>
+
+        <ul class="desktop-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
         <button id="menuToggle" aria-label="Toggle Menu">
             <span></span>
             <span></span>
@@ -111,9 +107,9 @@
         <section id="home" class="hero fade-in">
             <div class="hero-bg-slider">
                 <div class="slide active" style="background-image: url('Llaci-pics/homeScreenPics/0a776d8e-05bd-435d-9b43-e329212aef47(1).jpg');"></div>
-                <div class="slide" style="background-image: url('Llaci-pics/homeScreenPics/0f813b12-9103-445f-bc07-0cc7ad127191(1).jpg');"></div>
-                <div class="slide" style="background-image: url('Llaci-pics/homeScreenPics/108c9308-daac-420d-bf2d-4a6520019b6b(1).jpg');"></div>
-                <div class="slide" style="background-image: url('Llaci-pics/homeScreenPics/3e755036-a88d-494a-b382-c085966f0dd8.jpg');"></div>
+                <div class="slide" style="background-image: url('Llaci-pics/homeScreenPics/1b4b381f-5fe8-4b48-924a-4c499df1572a(1).jpg');"></div>
+                <div class="slide" style="background-image: url('Llaci-pics/homeScreenPics/7d3a853b-dfd6-4ad8-83d2-ef98a557d7df.jpg');"></div>
+                <div class="slide" style="background-image: url('Llaci-pics/homeScreenPics/912e23eb-9d44-44ce-bbed-c9fa60b445b2.jpg');"></div>
                 <div class="hero-overlay"></div>
             </div>
             <div class="hero-content">
@@ -135,123 +131,182 @@
             <div class="services-heading-block">
                 <h2 class="section-heading services-title">Services</h2>
             </div>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="25">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Projects Completed</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="10">0</span><span class="stat-suffix">yr</span>
+                    <span class="stat-label">Warranty</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">Licensed &amp; Insured</span>
+                </div>
+            </div>
         </section>
 
-        <section id="services-list" class="services-section fade-in">
+        <div class="services-wrapper">
             <div class="services-bg-slider" id="servicesBgSlider">
                 <div class="services-bg-overlay"></div>
             </div>
-            <div class="services-stack">
-                <!-- Basic Package -->
-                <div class="service-row service-card" id="cardBasic">
-                    <div class="service-info card-header">
-                        <h3>Dreamscape Design</h3>
-                        <p class="service-desc">Our landscape design service offers a comprehensive approach to indoor renovation & outdoor beautification, providing custom solutions that fit your dreamscape's unique shape and your personal style. From initial concept to final implementation, we ensure every detail contributes to a cohesive and stunning dreamscape.</p>
-                        <ul class="service-features">
-                            <li>Custom designs</li>
-                            <li>Cohesive dreamscapes</li>
-                            <li>Personalized service</li>
-                        </ul>
-                    </div>
-                    <div class="service-media slideshow-container">
-                        <div class="slideshow-wrapper" id="slideshowDesign">
-                            <!-- Dynamic images injected via app.js -->
-                        </div>
-                        <button class="slide-nav prev-arrow" aria-label="Previous image">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-                        </button>
-                        <button class="slide-nav next-arrow" aria-label="Next image">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                        </button>
-                    </div>
-                </div>
 
-                <!-- Super Package -->
-                <div class="service-row reverse service-card" id="cardSuper">
-                    <div class="service-info card-header">
-                        <h3>Dreamscape Construction</h3>
-                        <p class="service-desc">Transform your indoor & outdoor spaces with our custom dreamscape construction services. Our work is backed by quality craftsmanship, durable materials, a keen eye for design and a 10-year warranty.</p>
-                        <ul class="service-features">
-                            <li>House Builds & Renovations</li>
-                            <li>Interlocking & Stonework</li>
-                            <li>Outdoor Structures (Decks, Gazebos, Fences, & more)</li>
-                            <li>Garden Beds & Sod Installation</li>
-                            <li>Pools & Ponds</li>
-                            <li>Grading, Resloping & Escavation</li>
-                            <li>Demolition & Disposal</li>
-                            <li>Tree Removal</li>
-                            <li>Snow Removal</li>
-                            <li class="no-bullet">... And much, much more!</li>
-                        </ul>
-                    </div>
-                    <div class="service-media slideshow-container">
-                        <div class="slideshow-wrapper" id="slideshowConstruction">
-                            <!-- Dynamic images injected via app.js -->
+            <!-- Dreamscape Design Section -->
+            <section id="service-design" class="services-section fade-in">
+                <div class="services-stack">
+                    <div class="service-row">
+                        <div class="service-card" id="cardBasic">
+                            <div class="service-info card-header">
+                                <h3>Dreamscape Design</h3>
+                                <p class="service-desc">Our landscape design service offers a comprehensive approach to indoor renovation & outdoor beautification, providing custom solutions that fit your dreamscape's unique shape and your personal style. From initial concept to final implementation, we ensure every detail contributes to a cohesive and stunning dreamscape.</p>
+                                <ul class="service-features">
+                                    <li>Custom designs</li>
+                                    <li>Cohesive dreamscapes</li>
+                                    <li>Personalized service</li>
+                                </ul>
+                            </div>
                         </div>
-                        <button class="slide-nav prev-arrow" aria-label="Previous image">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-                        </button>
-                        <button class="slide-nav next-arrow" aria-label="Next image">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Luxury Package -->
-                <div class="service-row service-card" id="cardLuxury">
-                    <div class="service-info card-header">
-                        <h3>Dreamscape Maintenance</h3>
-                        <p class="service-desc">Keep your dreamscape looking its best year-round with our professional maintenance service. From routine lawn care to seasonal planting and pruning, our team is dedicated to preserving the beauty and health of your dreamscape.<br><br>With our service, trust in a team that understands the importance of detail, seasonal variations, and the unique needs of your dreamscape, ensuring it thrives all year round.</p>
-                        <ul class="service-features">
-                            <li>Routine care</li>
-                            <li>Seasonal adjustments</li>
-                            <li>Health-focused</li>
-                        </ul>
-                    </div>
-                    <div class="service-media slideshow-container">
-                        <div class="slideshow-wrapper" id="slideshowMaintenance">
-                            <!-- Dynamic images injected via app.js -->
-                        </div>
-                        <button class="slide-nav prev-arrow" aria-label="Previous image">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-                        </button>
-                        <button class="slide-nav next-arrow" aria-label="Next image">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Additional Services -->
-                <div class="service-row reverse service-card" id="cardAdditional">
-                    <div class="service-info card-header">
-                        <h3>Additional Services</h3>
-                        <p class="service-desc">Targeted services to handle specific landscaping needs and enhance your outdoor living experience.</p>
-                        <ul class="service-features">
-                            <li>Custom Lighting</li>
-                            <li>Patio Installation</li>
-                            <li>Pool Design</li>
-                            <li>Outdoor Kitchens</li>
-                            <li>Sodding & Seeding</li>
-                            <li>Tree Removal</li>
-                        </ul>
-                    </div>
-                    <div class="service-media promo-display">
-                        <div class="promo-tag glass-card">
-                            <h4>Special Offers</h4>
-                            <p>First time customers get a <span class="highlight">Free Consultation</span> on design projects!</p>
-                            <br>
-                            <h4>Maintenance Plans</h4>
-                            <p>Available weekly, bi-weekly, or monthly.</p>
-                            <ul class="promo-list">
-                                <li>Weekly: <strong>10% Discount</strong></li>
-                                <li>Bi-weekly: <strong>5% Discount</strong></li>
-                            </ul>
+                        <div class="service-image-card" id="cardBasicImage">
+                            <div class="service-media slideshow-container">
+                                <div class="slideshow-wrapper" id="slideshowDesign">
+                                    <!-- Dynamic images injected via app.js -->
+                                </div>
+                                <button class="slide-nav prev-arrow" aria-label="Previous image">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                                </button>
+                                <button class="slide-nav next-arrow" aria-label="Next image">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-            </div>
-        </section>
+            <!-- Dreamscape Construction Section -->
+            <section id="service-construction" class="services-section fade-in">
+                <div class="services-stack">
+                    <div class="service-row reverse">
+                        <div class="service-card" id="cardSuper">
+                            <div class="service-info card-header">
+                                <h3>Dreamscape Construction</h3>
+                                <p class="service-desc">Transform your indoor & outdoor spaces with our custom dreamscape construction services. Our work is backed by quality craftsmanship, durable materials, a keen eye for design and a 10-year warranty.</p>
+                                <ul class="service-features">
+                                    <li>House Builds &amp; Renovations</li>
+                                    <li>Interlocking &amp; Stonework</li>
+                                    <li>Outdoor Structures (Decks, Gazebos, Fences, &amp; more)</li>
+                                    <li>Garden Beds &amp; Sod Installation</li>
+                                    <li>Pools &amp; Ponds</li>
+                                    <li>Grading, Resloping &amp; Escavation</li>
+                                    <li>Demolition &amp; Disposal</li>
+                                    <li>Tree Removal</li>
+                                    <li>Snow Removal</li>
+                                    <li class="no-bullet">... And much, much more!</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="service-image-card" id="cardSuperImage">
+                            <div class="service-media slideshow-container">
+                                <div class="slideshow-wrapper" id="slideshowConstruction">
+                                    <!-- Dynamic images injected via app.js -->
+                                </div>
+                                <button class="slide-nav prev-arrow" aria-label="Previous image">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                                </button>
+                                <button class="slide-nav next-arrow" aria-label="Next image">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dreamscape Maintenance Section -->
+            <section id="service-maintenance" class="services-section fade-in">
+                <div class="services-stack">
+                    <div class="service-row">
+                        <div class="service-card" id="cardLuxury">
+                            <div class="service-info card-header">
+                                <h3>Dreamscape Maintenance</h3>
+                                <p class="service-desc">Keep your dreamscape looking its best year-round with our professional maintenance service. From routine lawn care to seasonal planting and pruning, our team is dedicated to preserving the beauty and health of your dreamscape.<br><br>With our service, trust in a team that understands the importance of detail, seasonal variations, and the unique needs of your dreamscape, ensuring it thrives all year round.</p>
+                                <ul class="service-features">
+                                    <li>Routine care</li>
+                                    <li>Seasonal adjustments</li>
+                                    <li>Health-focused</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="service-image-card" id="cardLuxuryImage">
+                            <div class="service-media slideshow-container">
+                                <div class="slideshow-wrapper" id="slideshowMaintenance">
+                                    <!-- Dynamic images injected via app.js -->
+                                </div>
+                                <button class="slide-nav prev-arrow" aria-label="Previous image">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                                </button>
+                                <button class="slide-nav next-arrow" aria-label="Next image">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Services & Offers Section -->
+            <section id="service-extras" class="services-section fade-in">
+                <div class="services-stack">
+                    <div class="service-row">
+                        <div class="service-card" id="cardAdditional">
+                            <div class="service-info card-header">
+                                <h3>Additional Services</h3>
+                                <p class="service-desc">Targeted services to handle specific landscaping needs and enhance your outdoor living experience.</p>
+                                <ul class="service-features">
+                                    <li>Custom Lighting</li>
+                                    <li>Patio Installation</li>
+                                    <li>Pool Design</li>
+                                    <li>Outdoor Kitchens</li>
+                                    <li>Sodding &amp; Seeding</li>
+                                    <li>Tree Removal</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="cardOffers" class="offers-card service-card">
+                            <div class="offers-header">
+                                <h3 class="offers-title">Special Offers</h3>
+                                <p class="offers-subtitle">Exclusive deals for new and returning clients</p>
+                            </div>
+                            <div class="offers-grid">
+                                <div class="offer-item">
+                                    <div class="offer-label">New Clients</div>
+                                    <h4 class="offer-name">Free Consultation</h4>
+                                    <p class="offer-detail">First-time customers receive a complimentary consultation on any design project — no commitment required.</p>
+                                </div>
+                                <div class="offer-divider"></div>
+                                <div class="offer-item">
+                                    <div class="offer-label">Maintenance Plans</div>
+                                    <h4 class="offer-name">Recurring Discounts</h4>
+                                    <p class="offer-detail">Save more with a regular schedule.</p>
+                                    <ul class="offer-rates">
+                                        <li><span class="offer-rate-plan">Weekly</span><span class="offer-rate-value">10% off</span></li>
+                                        <li><span class="offer-rate-plan">Bi-weekly</span><span class="offer-rate-value">5% off</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
         <!-- Gallery Section -->
         <section id="gallery" class="gallery-section fade-in">
             <div class="services-heading-block">
@@ -278,9 +333,6 @@
                 <!-- Dynamic images injected via app.js -->
             </div>
 
-            <div class="gallery-grid preview-grid">
-                <!-- Random previews injected via app.js -->
-            </div>
         </section>
 
         <!-- Testimonials Section -->
@@ -289,36 +341,28 @@
                 <h2 class="section-heading services-title">Testimonials</h2>
                 <p class="services-tagline">What our clients say about Lotus.</p>
             </div>
-            <div class="testimonial-slider">
-                <!-- Testimonial 2 -->
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card glass-card">
-                    <div class="notepad-section-tag">Client Testimonial</div>
-                    <blockquote class="testimonial-text">
-                        "LLACI truly turned my landscaping dreams into reality. Their unique designs and high-quality craftsmanship exceeded my expectations. I highly recommend them for anyone looking for top-notch professionalism and stunning landscapes."
-                    </blockquote>
-                    <cite class="testimonial-author">— Richard K.</cite>
+            <div class="testimonial-card glass-card">
+                <div class="testimonial-entries">
+                    <div class="testimonial-entry">
+                        <blockquote class="testimonial-text">"LLACI truly turned my landscaping dreams into reality. Their unique designs and high-quality craftsmanship exceeded my expectations. I highly recommend them for anyone looking for top-notch professionalism and stunning landscapes."</blockquote>
+                        <cite class="testimonial-author">Richard K.</cite>
+                    </div>
+                    <div class="testimonial-entry">
+                        <blockquote class="testimonial-text">"Lotus Landscaping transformed our backyard into a private oasis. Their attention to detail and creative design exceeded all our expectations."</blockquote>
+                        <cite class="testimonial-author">Michael &amp; Sarah &mdash; Toronto</cite>
+                    </div>
+                    <div class="testimonial-entry">
+                        <blockquote class="testimonial-text">"Professional, reliable, and incredibly talented. The construction team was a pleasure to work with throughout the entire project."</blockquote>
+                        <cite class="testimonial-author">David Chen &mdash; Oakville</cite>
+                    </div>
+                    <div class="testimonial-entry">
+                        <blockquote class="testimonial-text">"Our garden has never looked better. The maintenance team treats our landscape as if it were their own. Truly exceptional service."</blockquote>
+                        <cite class="testimonial-author">Elena Rodriguez &mdash; Mississauga</cite>
+                    </div>
                 </div>
-
-                <div class="testimonial-card glass-card">
-                    <p class="testimonial-text">"Lotus Landscaping transformed our backyard into a private oasis. Their attention to detail and creative design exceeded all our expectations."</p>
-                    <p class="testimonial-author">— Michael & Sarah, Toronto</p>
-                </div>
-                <div class="testimonial-card glass-card">
-                    <p class="testimonial-text">"Professional, reliable, and incredibly talented. The construction team was a pleasure to work with throughout the entire project."</p>
-                    <p class="testimonial-author">— David Chen, Oakville</p>
-                </div>
-                <div class="testimonial-card glass-card">
-                    <p class="testimonial-text">"Our garden has never looked better. The maintenance team treats our landscape as if it were their own. Truly exceptional service."</p>
-                    <p class="testimonial-author">— Elena Rodriguez, Mississauga</p>
-                </div>
-
-                <!-- Success Story -->
-                <div class="testimonial-card glass-card">
-                    <div class="notepad-section-tag" style="color: var(--accent-color);">Client Success Story</div>
-                    <p class="testimonial-text" style="font-style: normal; font-size: 1.1rem;">
-                        One of our most memorable success stories is when we rebuilt an old, broken-down, candle-making workshop into a dream mancave/guest house. The client was thrilled with the transformation and it was a project that truly showcased our expertise and creativity.
-                    </p>
+                <div class="testimonial-success-story">
+                    <div class="success-label">Client Success Story</div>
+                    <p>One of our most memorable projects: we rebuilt an old, broken-down workshop into a dream mancave and guest house. The transformation showcased the full range of our design and construction expertise.</p>
                 </div>
             </div>
         </section>
@@ -410,62 +454,47 @@
             </div>
         </section>
 
-        <!-- Learn More -->
+        <!-- Why Choose LLACI -->
         <section id="learn" class="learn-more-section fade-in">
             <div class="learn-card">
-                <h3 class="learn-heading">Professional Resources</h3>
-                <ul class="learn-links">
-                    <li>
-                        <a href="https://www.houzz.com" target="_blank" rel="noopener noreferrer">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                            </svg>
-                            Houzz Portfolio
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://homestars.com" target="_blank" rel="noopener noreferrer">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                            </svg>
-                            HomeStars Reviews
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://landscapeontario.com" target="_blank" rel="noopener noreferrer">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                                <path d="M2 17l10 5 10-5" />
-                                <path d="M2 12l10 5 10-5" />
-                            </svg>
-                            Landscape Ontario
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.ontario.ca/page/building-code" target="_blank" rel="noopener noreferrer">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <polyline points="10 9 9 9 8 9"></polyline>
-                            </svg>
-                            Building Codes
-                        </a>
-                    </li>
-                </ul>
+                <h3 class="learn-heading">Why Choose LLACI</h3>
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <span>Licensed &amp; Insured</span>
+                    </div>
+                    <div class="trust-badge">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                        <span>10-Year Warranty</span>
+                    </div>
+                    <div class="trust-badge">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span>Since 1999</span>
+                    </div>
+                    <div class="trust-badge">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>5-Star Rated</span>
+                    </div>
+                </div>
 
                 <div class="learn-divider"></div>
 
                 <blockquote class="knowledge-quote">
                     <span class="quote-mark">"</span>
-                    <span id="quoteText">To create a garden is to search for a better world.</span>
-                    <cite id="quoteAuthor">— Marina Schinz</cite>
+                    <span id="quoteText">The glory of gardening: hands in the dirt, head in the sun, heart with nature.</span>
+                    <cite id="quoteAuthor">— Alfred Austin</cite>
                 </blockquote>
             </div>
         </section>
@@ -476,21 +505,78 @@
     <!-- Footer -->
     <footer>
         <div class="footer-inner">
-            <p class="footer-copyright">
-                &copy; <span id="currentYear"></span> Lotus Landscaping & Construction Inc. 
-                <span class="rights-split">|</span> All Rights Reserved. 
-                <span class="heritage-text">Since 1999.</span>
-            </p>
-            <div class="footer-logo">
-                <img class="footer-logo-img" src="Logo_transparent.png" alt="LLACI">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <img class="footer-logo-img" src="Logo_transparent.png" alt="LLACI">
+                    <p class="footer-tagline">Crafting your dreamscape into reality since 1999.</p>
+                    <div class="footer-social">
+                        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a href="https://www.houzz.com" target="_blank" rel="noopener noreferrer" aria-label="Houzz">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Service Areas</h4>
+                    <ul class="footer-links">
+                        <li>York Region</li>
+                        <li>Durham Region</li>
+                        <li>Markham</li>
+                        <li>Newmarket</li>
+                        <li>Greater Toronto Area</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Business Hours</h4>
+                    <ul class="footer-links footer-hours">
+                        <li><span>Mon – Fri</span><span>7:00 AM – 7:00 PM</span></li>
+                        <li><span>Saturday</span><span>8:00 AM – 5:00 PM</span></li>
+                        <li><span>Sunday</span><span>By Appointment</span></li>
+                    </ul>
+                    <div class="footer-badge">Licensed &amp; Insured</div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    &copy; <span id="currentYear"></span> Lotus Landscaping &amp; Construction Inc. 
+                    <span class="rights-split">|</span> All Rights Reserved. 
+                    <span class="heritage-text">Since 1999.</span>
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- Background Music -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="Beres Hammond - I Feel Good - Karaoke Version from Zoom Karaoke - Zoom Karaoke Official (128k).mp3" type="audio/mpeg">
-    </audio>
+    <!-- Floating Call Button -->
+    <a href="tel:+16475182485" class="floating-call-btn" aria-label="Call Us">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+    </a>
+
 
 
     <!-- Lightbox for Image Expansion -->

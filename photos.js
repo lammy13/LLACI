@@ -1,23 +1,16 @@
 const photoData = {
   "home": [
+    "Llaci-pics/homeScreenPics/0a2e51d37-a0d4-4c6a-887a-b81da34bf653.jpg",
     "Llaci-pics/homeScreenPics/0a776d8e-05bd-435d-9b43-e329212aef47(1).jpg",
-    "Llaci-pics/homeScreenPics/0f813b12-9103-445f-bc07-0cc7ad127191(1).jpg",
-    "Llaci-pics/homeScreenPics/108c9308-daac-420d-bf2d-4a6520019b6b(1).jpg",
-    "Llaci-pics/homeScreenPics/12e51d37-a0d4-4c6a-887a-b81da34bf653(1).jpg",
-    "Llaci-pics/homeScreenPics/12e51d37-a0d4-4c6a-887a-b81da34bf653.jpg",
     "Llaci-pics/homeScreenPics/1b4b381f-5fe8-4b48-924a-4c499df1572a(1).jpg",
     "Llaci-pics/homeScreenPics/3dbf83ef-078a-45ea-ae9b-ea37b3b5a31d.jpg",
-    "Llaci-pics/homeScreenPics/3de7e54f-8095-4fc9-b82b-a9308384011e.jpg",
-    "Llaci-pics/homeScreenPics/3e755036-a88d-494a-b382-c085966f0dd8.jpg",
     "Llaci-pics/homeScreenPics/608f9732-9d3f-45fb-b26a-04a644737e57(1).jpg",
     "Llaci-pics/homeScreenPics/741e9eef-8f23-4917-ae46-e61826b2f1d3(1).jpg",
     "Llaci-pics/homeScreenPics/7d3a853b-dfd6-4ad8-83d2-ef98a557d7df.jpg",
-    "Llaci-pics/homeScreenPics/7fb6433d-dbbc-4b18-8244-3c77577a9350.jpg",
     "Llaci-pics/homeScreenPics/912e23eb-9d44-44ce-bbed-c9fa60b445b2.jpg",
     "Llaci-pics/homeScreenPics/bc9278b1-036e-4635-bda1-1946b4c93c57.jpg",
     "Llaci-pics/homeScreenPics/bd5ea88a-18e2-499f-9e5d-449e24474430(1).jpg",
-    "Llaci-pics/homeScreenPics/ccb4fb11-97ea-42ac-ba44-7b3b7aede9cb.jpg",
-    "Llaci-pics/homeScreenPics/fc88b706-e786-4605-a1c9-8799a75845fa.jpg"
+    "Llaci-pics/homeScreenPics/ccb4fb11-97ea-42ac-ba44-7b3b7aede9cb.jpg"
   ],
   "design": [
     "Llaci-pics/Dreamscape Design/05c28d8b-743e-4b6c-8371-bd396dcd524b(1).jpg",

@@ -162,14 +162,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // CTA email link — no form handler needed, mailto: triggers native email client
 
-    // Scroll Effects for Navigation
+    // Scroll Effects for Navigation + Progress Bar
     const nav = document.getElementById('mainNav');
+    const scrollProgress = document.getElementById('scrollProgress');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 20) {
             nav.classList.add('scrolled');
         } else {
             nav.classList.remove('scrolled');
         }
+        // Update scroll progress bar
+        if (scrollProgress) {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        }
+    });
+
+    // Desktop nav smooth scroll
+    document.querySelectorAll('.desktop-nav-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
     });
 
     // Initialize theme and advanced animations on load
@@ -188,7 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initServiceSlideshows();
     initGalleryExpander();
-    initLightbox(); // Initialize the enhanced lightbox
+    initLightbox();
+    initStatCounters();
 });
 
 // =============================================
@@ -433,7 +453,7 @@ function initAdvancedAnimations() {
         y: '16%',
         ease: 'none',
         scrollTrigger: {
-            trigger: '.services-section',
+            trigger: '.services-wrapper',
             start: 'top bottom',
             end: 'bottom top',
             scrub: true
@@ -477,9 +497,12 @@ function initAdvancedAnimations() {
         ease: 'power2.out'
     });
 
-    // Service rows will now use the standard professional fade-in transition
+    // Service rows and Image cards dynamic scaling
     const serviceRows = gsap.utils.toArray('.service-row');
     serviceRows.forEach((row) => {
+        const imageCard = row.querySelector('.service-image-card');
+        
+        // Base row animation
         gsap.from(row, {
             scrollTrigger: {
                 trigger: row,
@@ -491,6 +514,22 @@ function initAdvancedAnimations() {
             duration: 1.2,
             ease: 'power2.out'
         });
+
+        // Dynamic scale for image cards
+        if (imageCard) {
+            gsap.fromTo(imageCard, 
+                { scale: 0.95 },
+                {
+                    scale: 1.05,
+                    scrollTrigger: {
+                        trigger: imageCard,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: true
+                    }
+                }
+            );
+        }
     });
 
     // 3. Lottie Framework
@@ -518,7 +557,7 @@ function initAdvancedAnimations() {
     }
 
     // 5. HTML5 Canvas Particle System (Server Rack assembly on scroll)
-    initCanvasParticles();
+    // initCanvasParticles();
 }
 
 function initCanvasParticles() {
@@ -754,21 +793,19 @@ function setTheme(themeName) {
     });
 }
 
-/// Randomize the philosopher quote at the bottom of the page
+/// Randomize the landscaping quote at the bottom of the page
 function initQuotes() {
     const quotes = [
-        { text: "The only true wisdom is in knowing you know nothing.", author: "Socrates" },
-        { text: "Everything has beauty, but not everyone sees it.", author: "Confucius" },
-        { text: "The unexamined life is not worth living.", author: "Socrates" },
-        { text: "He who has a why to live can bear almost any how.", author: "Friedrich Nietzsche" },
-        { text: "Happiness depends upon ourselves.", author: "Aristotle" },
-        { text: "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", author: "Aristotle" },
-        { text: "The secret of happiness is not found in seeking more, but in developing the capacity to enjoy less.", author: "Socrates" },
-        { text: "Man is condemned to be free; because once thrown into the world, he is responsible for everything he does.", author: "Jean-Paul Sartre" },
-        { text: "The mind is furnished with ideas by experience alone.", author: "John Locke" },
-        { text: "Act only according to that maxim whereby you can will that it should become a universal law.", author: "Immanuel Kant" },
-        { text: "Life must be understood backward. But it must be lived forward.", author: "Søren Kierkegaard" },
-        { text: "The greater the difficulty, the more glory in surmounting it.", author: "Epicurus" }
+        { text: "The glory of gardening: hands in the dirt, head in the sun, heart with nature.", author: "Alfred Austin" },
+        { text: "To plant a garden is to believe in tomorrow.", author: "Audrey Hepburn" },
+        { text: "A garden is a grand teacher. It teaches patience and careful watchfulness.", author: "Gertrude Jekyll" },
+        { text: "In every walk with nature, one receives far more than he seeks.", author: "John Muir" },
+        { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" },
+        { text: "Gardens are not made by singing 'Oh, how beautiful,' and sitting in the shade.", author: "Rudyard Kipling" },
+        { text: "He who plants a garden plants happiness.", author: "Chinese Proverb" },
+        { text: "A beautiful landscape is a work of art done by nature and perfected by craft.", author: "Unknown" },
+        { text: "The earth laughs in flowers.", author: "Ralph Waldo Emerson" },
+        { text: "Gardening adds years to your life, and life to your years.", author: "Unknown" }
     ];
 
     const quoteText = document.getElementById('quoteText');
@@ -891,7 +928,7 @@ function initGalleryExpander() {
         // If grid is already open, and we click the button, let's toggle it closed
         if (isGridVisible) {
             fullGrid.classList.add('hidden');
-            previewGrid.classList.remove('hidden');
+            if (previewGrid) previewGrid.classList.remove('hidden');
             dropdownBtn.querySelector('span').textContent = 'View All Categories';
             dropdownBtn.classList.remove('active');
             dropdownMenu.classList.add('hidden');
@@ -900,11 +937,11 @@ function initGalleryExpander() {
 
         const isHidden = dropdownMenu.classList.toggle('hidden');
         dropdownBtn.classList.toggle('active', !isHidden);
-        
+
         if (!isHidden && fullGrid.innerHTML === '') {
             renderGallery('all');
             fullGrid.classList.remove('hidden');
-            previewGrid.classList.add('hidden');
+            if (previewGrid) previewGrid.classList.add('hidden');
             dropdownBtn.querySelector('span').textContent = 'All Projects';
         }
     });
@@ -912,7 +949,7 @@ function initGalleryExpander() {
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const filter = btn.dataset.filter;
-            
+
             // Update UI
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
@@ -923,7 +960,7 @@ function initGalleryExpander() {
             // Render
             renderGallery(filter);
             fullGrid.classList.remove('hidden');
-            previewGrid.classList.add('hidden');
+            if (previewGrid) previewGrid.classList.add('hidden');
 
             // Scroll slightly to grid if it was hidden
             fullGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -973,47 +1010,42 @@ function initGalleryExpander() {
     });
 }
 
-/// Set the music button to a given state: 'play', 'pause', or 'replay'
-function setMusicIcon(state) {
-    document.getElementById('musicPlayIcon').style.display   = state === 'play'   ? '' : 'none';
-    document.getElementById('musicPauseIcon').style.display  = state === 'pause'  ? '' : 'none';
-    document.getElementById('musicReplayIcon').style.display = state === 'replay' ? '' : 'none';
+// =============================================
+// Animated Stat Counters
+// =============================================
+function initStatCounters() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length === 0) return;
 
-    const btn = document.getElementById('musicToggleBtn');
-    btn.classList.toggle('playing', state === 'pause');
-    btn.title = state === 'replay' ? 'Replay' : state === 'pause' ? 'Pause' : 'Play';
+    const animateCounter = (el) => {
+        const target = parseInt(el.getAttribute('data-target'));
+        const duration = 2000;
+        const start = performance.now();
+        
+        const update = (now) => {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target);
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        };
+        
+        requestAnimationFrame(update);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const numbers = entry.target.querySelectorAll('.stat-number');
+                numbers.forEach(n => animateCounter(n));
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const statsBar = document.querySelector('.stats-bar');
+    if (statsBar) observer.observe(statsBar);
 }
-
-/// Single handler for the music button — play, pause, or replay depending on state
-function handleMusicBtn() {
-    const audio = document.getElementById('bgMusic');
-
-    if (audio.ended || (audio.paused && audio.currentTime === 0 && document.getElementById('musicReplayIcon').style.display !== 'none')) {
-        // Replay
-        audio.currentTime = 0;
-        audio.play()
-            .then(() => setMusicIcon('pause'))
-            .catch(err => {
-                console.error("Replay failed:", err);
-                alert("Click anywhere on the page first to allow music playback!");
-            });
-    } else if (audio.paused) {
-        audio.play()
-            .then(() => setMusicIcon('pause'))
-            .catch(err => {
-                console.error("Audio playback failed:", err);
-                alert("Click anywhere on the page first to allow music playback!");
-            });
-    } else {
-        audio.pause();
-        setMusicIcon('play');
-    }
-}
-
-/// Wire up the ended event once the DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    const audio = document.getElementById('bgMusic');
-    if (audio) {
-        audio.addEventListener('ended', () => setMusicIcon('replay'));
-    }
-});
