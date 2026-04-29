@@ -4486,8 +4486,13 @@ body[data-theme="light"] #menuToggle {
     /* Hero */
     .hero-content { padding: 5rem 1.2rem 2rem; }
     .hero-logo-wrap { height: clamp(100px, 38vw, 200px); }
-    .hero-title { font-size: clamp(1.2rem, 6vw, 1.8rem); }
-    .hero-subtitle { font-size: 0.85rem; }
+    .hero-title {
+        font-size: clamp(1rem, 5.5vw, 1.8rem);
+        letter-spacing: 0.04em;        /* tight — wide spacing broke words across lines */
+        overflow-wrap: normal;         /* never split mid-word */
+        word-break: keep-all;
+    }
+    .hero-subtitle { font-size: 0.82rem; letter-spacing: 0.1em; }
 
     /* Services intro */
     .services-intro-section { padding: 4rem 1.2rem 2rem; }
@@ -4541,7 +4546,7 @@ body[data-theme="light"] #menuToggle {
 @media (max-width: 380px) {
     .services-title { font-size: 1.8rem; }
     .stat-item { min-width: 100%; }
-    .hero-title { font-size: 1.1rem; }
+    .hero-title { font-size: 0.95rem; letter-spacing: 0.02em; }
     .service-card { padding: 1.2rem; }
     .process-steps { gap: 2rem; }
 }
@@ -4750,6 +4755,7 @@ body[data-theme="light"] .services-bg-overlay {
        so the title panel still reads clearly against the photo */
     .hero-text-panel {
         background: rgba(0, 0, 0, 0.52) !important;
-        padding: 1.2rem 1.4rem 1.1rem !important;
+        padding: 1.1rem 1rem 1rem !important;
+        width: 100%;
     }
 }
