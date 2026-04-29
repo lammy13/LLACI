@@ -515,12 +515,12 @@ function initAdvancedAnimations() {
             ease: 'power2.out'
         });
 
-        // Dynamic scale for image cards
+        // Subtle parallax for image cards — tight range prevents blur
         if (imageCard) {
-            gsap.fromTo(imageCard, 
-                { scale: 0.95 },
+            gsap.fromTo(imageCard,
+                { y: 10 },
                 {
-                    scale: 1.05,
+                    y: -10,
                     scrollTrigger: {
                         trigger: imageCard,
                         start: 'top bottom',
