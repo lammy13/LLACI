@@ -4633,3 +4633,101 @@ body[data-theme="light"] .services-bg-overlay {
         rgba(240, 224, 196, 0.4) 100%
     );
 }
+
+/* =============================================
+   MOBILE PERFORMANCE
+   Only removes GPU-expensive compositing tricks.
+   All CSS animations (marquee, logo, hero text,
+   counters, fade-ins) are deliberately untouched.
+   ============================================= */
+@media (max-width: 768px) {
+
+    /* --- Viewport height fix (iOS Safari address-bar bounce) ---
+       100vh on iOS includes the address bar, so the hero is taller
+       than the visible screen and bounces when the bar hides/shows.
+       100svh = Small Viewport Height = always the visible area only. */
+    .hero {
+        min-height: 100svh !important;
+    }
+    .mobile-menu {
+        height: 100svh !important;
+    }
+
+    /* --- Kill 3D rendering contexts on service rows ---
+       transform-style: preserve-3d forces a 3D compositing layer on
+       every row. With 4 rows this means 4 heavyweight GPU layers that
+       all need to repaint while scrolling. Flat removes this cost. */
+    .service-row {
+        will-change: auto !important;
+        transform-style: flat !important;
+    }
+
+    /* --- Remove will-change from hero slides ---
+       4 slides × will-change: opacity = 4 GPU layers loaded at once.
+       Also strip the CSS filter — contrast/saturation creates a 5th
+       layer per slide and is invisible at phone screen sizes. */
+    .hero-bg-slider .slide {
+        will-change: auto !important;
+        filter: none !important;
+    }
+
+    /* --- Remove will-change from slideshow and gallery images ---
+       These were accelerating elements that scroll out of view, burning
+       memory for nothing. */
+    .slideshow-wrapper img,
+    .gallery-item,
+    .gallery-img {
+        will-change: auto !important;
+    }
+
+    /* --- backdrop-filter: the #1 GPU drain on mid-range phones ---
+       Every blurred element repaints the pixels behind it on every
+       scroll frame. Elements still look correct because the warm-beige
+       theme already provides solid background colors. */
+    .glass-nav,
+    .glass-card,
+    .service-card,
+    .service-image-card,
+    .testimonial-card,
+    .testimonial-quote,
+    .process-card,
+    .stats-bar,
+    .contact-form-wrapper,
+    .contact-pill,
+    .contact-map-wrapper,
+    .learn-card,
+    .floating-call-btn,
+    .back-to-top-btn,
+    .hero-cta,
+    .nav-cta,
+    .gallery-item,
+    #menuToggle {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    /* --- Trim box-shadow to a single layer ---
+       Multi-layer shadows are repainted on every scroll frame. */
+    .service-card,
+    .glass-card,
+    .testimonial-card,
+    .learn-card {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    /* --- Disable hover-lift on touch ---
+       Mobile: hover fires on tap. The transform fires, the page
+       re-renders, then immediately reverses — looks glitchy. */
+    .service-card:hover,
+    .testimonial-card:hover,
+    .learn-card:hover,
+    .gallery-item:hover {
+        transform: none !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    /* --- Map filter is wasted on small screens --- */
+    .contact-map-wrapper iframe {
+        filter: none !important;
+    }
+}

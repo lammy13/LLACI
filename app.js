@@ -1,3 +1,15 @@
+// ---- Mobile detection (checked once at load, reused everywhere) ----
+const isMobile = window.matchMedia('(max-width: 768px)').matches ||
+    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+// ---- Slideshow registry: pause all when tab is hidden, resume on return ----
+const _slideshows = [];
+function _registerSlideshow(ctrl) { _slideshows.push(ctrl); }
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) _slideshows.forEach(s => s.stop());
+    else _slideshows.forEach(s => s.start());
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     // Set Current Year in Footer
     const yearSpan = document.getElementById('currentYear');
@@ -166,28 +178,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.getElementById('mainNav');
     const scrollProgress = document.getElementById('scrollProgress');
     const backToTopBtn = document.getElementById('backToTop');
+    // rAF-throttled scroll handler + passive flag = no scroll jank on mobile
+    let _scrollRaf = false;
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-        // Update scroll progress bar
-        if (scrollProgress) {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-        }
-        // Show/hide back-to-top button after scrolling past the hero
-        if (backToTopBtn) {
-            if (window.scrollY > window.innerHeight * 0.8) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
+        if (_scrollRaf) return;
+        _scrollRaf = true;
+        requestAnimationFrame(() => {
+            if (window.scrollY > 20) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+            if (scrollProgress) {
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                scrollProgress.style.width = ((window.scrollY / docHeight) * 100) + '%';
             }
-        }
-    });
+            if (backToTopBtn) {
+                if (window.scrollY > window.innerHeight * 0.8) backToTopBtn.classList.add('visible');
+                else backToTopBtn.classList.remove('visible');
+            }
+            _scrollRaf = false;
+        });
+    }, { passive: true });
 
     // Back to Top — smooth scroll
     if (backToTopBtn) {
@@ -407,13 +416,20 @@ function initHeroSlider() {
     if (slides.length === 0) return;
 
     let currentSlide = 0;
-    const slideInterval = 5000; // 5 seconds per slide
+    let intervalId = null;
+    const delay = isMobile ? 8000 : 5000; // slower cycle on mobile saves battery
 
-    setInterval(() => {
+    const advance = () => {
         slides[currentSlide].classList.remove('active');
         currentSlide = (currentSlide + 1) % slides.length;
         slides[currentSlide].classList.add('active');
-    }, slideInterval);
+    };
+
+    const start = () => { if (!intervalId) intervalId = setInterval(advance, delay); };
+    const stop  = () => { clearInterval(intervalId); intervalId = null; };
+
+    start();
+    _registerSlideshow({ start, stop });
 }
 
 // =============================================
@@ -424,11 +440,30 @@ function initServicesBgSlider() {
     if (slides.length === 0) return;
 
     let current = 0;
-    setInterval(() => {
+    let intervalId = null;
+    const delay = isMobile ? 10000 : 6000;
+
+    const advance = () => {
         slides[current].classList.remove('active');
         current = (current + 1) % slides.length;
         slides[current].classList.add('active');
-    }, 6000);
+    };
+
+    const start = () => { if (!intervalId) intervalId = setInterval(advance, delay); };
+    const stop  = () => { clearInterval(intervalId); intervalId = null; };
+
+    // Only run while the services section is actually on screen
+    const wrapper = document.querySelector('.services-wrapper');
+    if (wrapper) {
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => e.isIntersecting ? start() : stop());
+        }, { threshold: 0.05 });
+        io.observe(wrapper);
+    } else {
+        start();
+    }
+
+    _registerSlideshow({ start, stop });
 }
 
 // =============================================
@@ -436,6 +471,9 @@ function initServicesBgSlider() {
 // =============================================
 function initAdvancedAnimations() {
     gsap.registerPlugin(ScrollTrigger);
+
+    // GSAP parallax / ScrollTrigger is too heavy on mobile — CSS handles the visuals
+    if (isMobile) return;
 
     // 0. Hero & Background Fade Out
     gsap.to(['.hero-content', '.hero-bg-slider'], {
@@ -907,8 +945,13 @@ function initServiceSlideshows() {
             });
         });
 
-        // Start automatic rotation
-        startSlideshow();
+        // Lazy-start: only spin up the interval while card is on screen
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => e.isIntersecting ? startSlideshow() : stopSlideshow());
+        }, { threshold: 0.1 });
+        io.observe(container);
+
+        _registerSlideshow({ start: startSlideshow, stop: stopSlideshow });
     });
 }
 
