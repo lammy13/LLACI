@@ -162,9 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // CTA email link — no form handler needed, mailto: triggers native email client
 
-    // Scroll Effects for Navigation + Progress Bar
+    // Scroll Effects for Navigation + Progress Bar + Back to Top
     const nav = document.getElementById('mainNav');
     const scrollProgress = document.getElementById('scrollProgress');
+    const backToTopBtn = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 20) {
             nav.classList.add('scrolled');
@@ -178,7 +179,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const scrollPercent = (scrollTop / docHeight) * 100;
             scrollProgress.style.width = scrollPercent + '%';
         }
+        // Show/hide back-to-top button after scrolling past the hero
+        if (backToTopBtn) {
+            if (window.scrollY > window.innerHeight * 0.8) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
     });
+
+    // Back to Top — smooth scroll
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
     // Desktop nav smooth scroll
     document.querySelectorAll('.desktop-nav-links a').forEach(link => {
