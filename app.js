@@ -233,8 +233,34 @@ document.addEventListener('DOMContentLoaded', () => {
     initServiceSlideshows();
     initGalleryExpander();
     initLightbox();
+    initGalleryPreviewStrip();
     initStatCounters();
 });
+
+function initGalleryPreviewStrip() {
+    const strip = document.getElementById('galleryPreviewStrip');
+    if (!strip || typeof photoData === 'undefined') return;
+
+    const scrollAmt = () => strip.clientWidth * 0.75;
+    document.getElementById('stripPrev')?.addEventListener('click', () => strip.scrollBy({ left: -scrollAmt(), behavior: 'smooth' }));
+    document.getElementById('stripNext')?.addEventListener('click', () => strip.scrollBy({ left:  scrollAmt(), behavior: 'smooth' }));
+
+    const photos = [
+        ...(photoData.design || []),
+        ...(photoData.construction || []),
+        ...(photoData.maintenance || [])
+    ];
+
+    photos.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.className = 'strip-thumb';
+        img.src = src;
+        img.alt = 'Project photo';
+        img.loading = 'lazy';
+        img.onclick = () => window.openLightbox(photos, i);
+        strip.appendChild(img);
+    });
+}
 
 // =============================================
 // Enhanced Lightbox Logic
